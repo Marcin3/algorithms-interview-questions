@@ -1,12 +1,12 @@
 import {test, expect} from '@playwright/test';
 
-const text = "Lorcaem Ipdsumb dolbor sit ametb."
+const text = "Lorcaem Ipdsumb Adolbor sit metb."
 const occurrencesToRemove = 2;
 
 const testCases = [
     {sentence: text, letter: 'a', expected: 'Lorcem Ipdsumb dolbor sit metb.'},
-    {sentence: text, letter: 'b', expected: 'Lorcaem Ipdsum dolor sit ametb.'},
-    {sentence: text, letter: 'c', expected: 'Loraem Ipdsumb dolbor sit ametb.'},
+    {sentence: text, letter: 'b', expected: 'Lorcaem Ipdsum Adolor sit metb.'},
+    {sentence: text, letter: 'c', expected: 'Loraem Ipdsumb Adolbor sit metb.'},
     {sentence: null, letter: 'z', expected: null},
     {sentence: "", letter: 'g', expected: ""}
 ];
@@ -32,14 +32,14 @@ testCases.forEach(({sentence, letter, expected}) => {
 function removeLetterBasic(sentence: string, letter: string, count: number) {
     if (sentence === null) return null;
 
-    if (count <= 0 || !sentence.includes(letter)) return sentence;
+    if (count <= 0 || !sentence.toLowerCase().includes(letter)) return sentence;
     const sentenceArray: string[] = sentence.split('');
-    if (sentenceArray.some(l => l === letter)) {
-        for (let i = 0; i < sentenceArray.length; i++) {
-            if (sentenceArray[i] === letter) {
-                sentenceArray.splice(i, 1);
-                break;
-            }
+    const target = letter.toLowerCase();
+
+    for (let i = 0; i < sentenceArray.length; i++) {
+        if (sentenceArray[i].toLowerCase() === target) {
+            sentenceArray.splice(i, 1);
+            break;
         }
     }
     return removeLetterBasic(sentenceArray.join(''), letter, count - 1);
@@ -50,10 +50,11 @@ function removeLetterEfficient(sentence: string, letter: string, count: number):
 
     let result = '';
     let removed = 0;
+    const target = letter.toLowerCase();
 
     for (let i = 0; i < sentence.length; i++) {
         const char = sentence[i];
-        if (char === letter && removed < count) {
+        if (char.toLowerCase() === target && removed < count) {
             removed++;
             continue;
         }
@@ -62,7 +63,6 @@ function removeLetterEfficient(sentence: string, letter: string, count: number):
 
     return result;
 }
-
 
 /**
  * Removes a specified number of occurrences of a given letter from a sentence, case-insensitive.

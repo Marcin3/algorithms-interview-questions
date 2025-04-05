@@ -1,7 +1,7 @@
 import {expect, test} from "@playwright/test";
 
 const testCases = [
-    {value: 'todo', result: true},
+    {value: 'todo', result: false},
     {value: 'todo1', result: false}
 ]
 

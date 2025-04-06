@@ -44,7 +44,7 @@ test.describe("Scope in JavaScript/TypeScript", () => {
     });
 
     test("closure encapsulates private state (createUserFactory)", () => {
-        function createUserFactory() {
+        const createUserFactory = () => {
             interface User {
                 username: string;
                 password: string;

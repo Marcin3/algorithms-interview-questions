@@ -9,9 +9,12 @@
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.51.1",
-    "@types/node": "^22.13.10"
+    "@types/lodash": "^4.17.16",
+    "@types/node": "^22.13.10",
+    "lodash": "^4.17.21"
   },
   "dependencies": {
+    "@playwright/mcp": "^0.0.7",
     "algorithms-interview-questions": "file:"
   }
 }

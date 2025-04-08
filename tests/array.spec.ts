@@ -134,4 +134,43 @@ test.describe('Array', () => {
         expect(age).toBe(30);
     });
 
+    test('mix to have only even numbers using multiple loop styles', async () => {
+        const numbers: number[] = [1, 2, 3, 4, 5];
+        const expectedArray: number[] = [2, 4];
+        const filterMethod: number[] = numbers.filter(n => n % 2 === 0);
+        expect(filterMethod, 'filter even using filet method').toEqual(expectedArray);
+
+        const classicFor: number[] = [];
+        for (let i = 0; i < numbers.length; i++) {
+            if (numbers[i] % 2 === 0) {
+                classicFor.push(numbers[i])
+            }
+        }
+        expect(classicFor, 'filter even classic for loop').toEqual(expectedArray);
+
+        const forOf: number[] = [];
+        for (const n of numbers) {
+            if (n % 2 === 0) {
+                forOf.push(n)
+            }
+        }
+        expect(forOf, 'filter even using forOf loop').toEqual(expectedArray);
+
+        const forEach: number[] = [];
+        numbers.forEach((n) => {
+            if (n % 2 === 0) {
+                forEach.push(n)
+            }
+        })
+        expect(forEach, 'filter even using forEach loop').toEqual(expectedArray);
+
+        const reduceMethod = numbers.reduce((arr, number) => {
+            if (number % 2 === 0) {
+                arr.push(number)
+            }
+            return arr;
+        }, [])
+        expect(reduceMethod, 'filter even using reduce method').toEqual(expectedArray);
+    });
+
 });

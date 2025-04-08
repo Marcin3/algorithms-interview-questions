@@ -36,6 +36,12 @@ testCases2.forEach(({sentence, palindrome}) => {
     })
 })
 
+testCases2.forEach(({sentence, palindrome}) => {
+    test(`Check if word ${sentence} could be palindrome with method which works on array`, async ({}) => {
+        expect(arrayIfThisCouldBePalindrome(sentence)).toEqual(palindrome)
+    })
+})
+
 
 const ifThisCouldBePalindrome = (word: string) => {
     const lowerCaseWord = word.toLowerCase();
@@ -60,4 +66,17 @@ const ifThisCouldBePalindrome = (word: string) => {
     console.log(Object.entries(dictionary));
 
     return oddCount <= 1;
+}
+
+const arrayIfThisCouldBePalindrome = (word: string) => {
+    const wordAsArray = word.toLowerCase().split('');
+
+    const rec: Record<string, number> = wordAsArray.reduce((arr, letter) => {
+        arr[letter] = (arr[letter] || 0) + 1;
+        return arr;
+    }, {} as Record<string, number>);
+
+    const value: number[] = Object.values(rec);
+    const amountOfOdd: number[] = value.filter(n =>  n%2 !==0 )
+    return amountOfOdd.length <= 1;
 }

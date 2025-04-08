@@ -164,7 +164,7 @@ test.describe('Array', () => {
         })
         expect(forEach, 'filter even using forEach loop').toEqual(expectedArray);
 
-        const reduceMethod = numbers.reduce((arr, number) => {
+        const reduceMethod = numbers.reduce<number[]>((arr, number) => {
             if (number % 2 === 0) {
                 arr.push(number)
             }

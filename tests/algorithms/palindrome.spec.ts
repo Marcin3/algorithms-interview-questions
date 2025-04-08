@@ -1,6 +1,5 @@
 import {expect, test} from "@playwright/test";
 
-
 const testCases = [
     {sentence: 'kajak', palindrome: true},
     {sentence: 'Kajak Kajak', palindrome: true},
@@ -32,18 +31,17 @@ const testCases2 = [
 
 testCases2.forEach(({sentence, palindrome}) => {
     test(`Check if word ${sentence} could be palindrome`, async ({}) => {
-        expect(ifThisCouldBePalindrome(sentence)).toEqual(palindrome)
+        expect(isPalindromePossible(sentence)).toEqual(palindrome)
     })
 })
 
 testCases2.forEach(({sentence, palindrome}) => {
     test(`Check if word ${sentence} could be palindrome with method which works on array`, async ({}) => {
-        expect(arrayIfThisCouldBePalindrome(sentence)).toEqual(palindrome)
+        expect(arrayIsPalindromePossible(sentence)).toEqual(palindrome)
     })
 })
 
-
-const ifThisCouldBePalindrome = (word: string) => {
+const isPalindromePossible = (word: string) => {
     const lowerCaseWord = word.toLowerCase();
     const dictionary: Record<string, number> = {};
     for (const charZ of lowerCaseWord) {
@@ -68,7 +66,7 @@ const ifThisCouldBePalindrome = (word: string) => {
     return oddCount <= 1;
 }
 
-const arrayIfThisCouldBePalindrome = (word: string) => {
+const arrayIsPalindromePossible = (word: string) => {
     const wordAsArray = word.toLowerCase().split('');
 
     const rec: Record<string, number> = wordAsArray.reduce((arr, letter) => {
@@ -80,3 +78,20 @@ const arrayIfThisCouldBePalindrome = (word: string) => {
     const amountOfOdd: number[] = value.filter(n =>  n%2 !==0 )
     return amountOfOdd.length <= 1;
 }
+
+const mapIsPalindromePossible = (word: string): boolean => {
+    const wordAsArray = word.toLowerCase().split('');
+
+    const map = new Map<string, number>();
+
+    for (const letter of wordAsArray) {
+        const count = map.get(letter) || 0;
+        map.set(letter, count + 1);
+    }
+
+    const values = Array.from(map.values());
+    const amountOfOdd = values.filter(n => n % 2 !== 0);
+
+    return amountOfOdd.length <= 1;
+}
+

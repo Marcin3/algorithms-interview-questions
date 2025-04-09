@@ -12,7 +12,7 @@ testCases.forEach(({value, result}) => {
 
 })
 
-const methodToImplemented = (value) => {
+const methodToImplemented = (value: unknown) => {
     return false;
 
 }

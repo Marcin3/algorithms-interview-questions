@@ -29,7 +29,7 @@ testCases.forEach(({sentence, letter, expected}) => {
     });
 });
 
-function removeLetterBasic(sentence: string, letter: string, count: number) {
+function removeLetterBasic(sentence: string |null, letter: string, count: number) {
     if (sentence === null) return null;
 
     if (count <= 0 || !sentence.toLowerCase().includes(letter)) return sentence;
@@ -45,7 +45,7 @@ function removeLetterBasic(sentence: string, letter: string, count: number) {
     return removeLetterBasic(sentenceArray.join(''), letter, count - 1);
 }
 
-function removeLetterEfficient(sentence: string, letter: string, count: number): string {
+function removeLetterEfficient(sentence: string | null, letter: string, count: number): string |null {
     if (sentence === null) return null;
 
     let result = '';
@@ -71,7 +71,7 @@ function removeLetterEfficient(sentence: string, letter: string, count: number):
  * @param count - The number of occurrences of the letter to remove
  * @returns The sentence with the specified number of letter occurrences removed
  */
-function removeLetter(sentence: string, letter: string, count: number): string {
+function removeLetter(sentence: string | null, letter: string, count: number): string | null {
     if (sentence === null) return null;
 
     let removed = 0;
